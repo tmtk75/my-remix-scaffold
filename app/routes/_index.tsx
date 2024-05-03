@@ -14,8 +14,8 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async () => {
   const s3 = new S3Client({
-    region: "us-east-1",
-    endpoint: "http://localhost:4566",
+    region: env.AWS_REGION,
+    endpoint: env.AWS_ENDPOINT_URL,
   });
   const res = await s3.send(new ListBucketsCommand());
   console.log(res.Buckets);
