@@ -1,36 +1,30 @@
-# Welcome to Remix + Vite!
+# README
+A scaffold for a fullstack web application with the following technologies.
+* remix
+* tailwind
+* ant design
+* prisma
+* biome
+* zod
+* vitest
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
 
-## Development
+# Article
+The outcome of <https://zenn.dev/tmtk75/scraps/aa82ab594e4c24>
 
-Run the Vite dev server:
-
-```shellscript
-npm run dev
+# Dockernize
 ```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
+docker build -t my-app .
 ```
-
-Then run the app in production mode:
-
-```sh
-npm start
 ```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
+my_ip=${your_ipaddr}
+docker run \
+    -e DATABASE_URL=postgres://admin:abc123@${my_ip}/example \
+    -e AWS_ENDPOINT_URL=http://${my_ip}:4566 \
+    -e AWS_ACCESS_KEY_ID=fake \
+    -e AWS_SECRET_ACCESS_KEY=fake \
+    -p 3000:3000 my-app
+```
+```
+docker compose -f compose.yml -f compose.my-app.yml up
+```
