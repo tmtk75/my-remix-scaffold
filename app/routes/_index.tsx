@@ -1,11 +1,19 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { DatePicker, Button } from "antd";
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
     { name: "description", content: "Welcome to Remix!" },
   ];
+};
+
+export const loader: LoaderFunction = async () => {
+  const users = await prisma.user.findMany();
+  console.debug({ users });
+  return users;
 };
 
 export default function Index() {
