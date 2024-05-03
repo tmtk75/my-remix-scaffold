@@ -1,0 +1,7 @@
+{
+    "files.exclude": {
+        ".vscode": true,
+        "pgdata": true,
+        "volume": true
+    }
+}
