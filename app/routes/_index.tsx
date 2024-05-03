@@ -1,4 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
+import { DatePicker, Button } from "antd";
 
 export const meta: MetaFunction = () => {
   return [
@@ -36,6 +37,9 @@ export default function Index() {
           </a>
         </li>
       </ul>
+
+      <Button type="primary">OK</Button>
+      <DatePicker />
     </div>
   );
 }
