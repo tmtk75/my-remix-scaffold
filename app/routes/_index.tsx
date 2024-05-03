@@ -2,6 +2,7 @@ import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import { DatePicker, Button } from "antd";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
+import { ListBucketsCommand, S3Client } from "@aws-sdk/client-s3";
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,6 +12,13 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader: LoaderFunction = async () => {
+  const s3 = new S3Client({
+    region: "us-east-1",
+    endpoint: "http://localhost:4566",
+  });
+  const res = await s3.send(new ListBucketsCommand());
+  console.log(res.Buckets);
+
   const users = await prisma.user.findMany();
   console.debug({ users });
   return users;
