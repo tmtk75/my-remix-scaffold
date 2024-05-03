@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  my-app:
+    image: my-app:latest
+    environment:
+      DATABASE_URL: postgres://admin:${PGPASSWORD-abc123}@postgres/example
+      AWS_ENDPOINT_URL: http://localstack:4566
+      AWS_ACCESS_KEY_ID: fake
+      AWS_SECRET_ACCESS_KEY: fake
+    ports:
+      - "3000:3000"
+
