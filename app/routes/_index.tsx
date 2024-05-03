@@ -3,6 +3,7 @@ import { DatePicker, Button } from "antd";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { ListBucketsCommand, S3Client } from "@aws-sdk/client-s3";
+import { env } from "~/env";
 
 export const meta: MetaFunction = () => {
   return [
@@ -21,6 +22,8 @@ export const loader: LoaderFunction = async () => {
 
   const users = await prisma.user.findMany();
   console.debug({ users });
+
+  env;
   return users;
 };
 
