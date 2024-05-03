@@ -9,3 +9,8 @@ node_modules
 # prisma
 prisma/dev.db
 prisma/dev.db-*
+
+# docker
+/pgdata
+/volume
+
