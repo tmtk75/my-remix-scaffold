@@ -1,21 +1,55 @@
-import { Button, Layout } from "antd";
+import {
+  Button,
+  Cascader,
+  ColorPicker,
+  ConfigProvider,
+  DatePicker,
+  Layout,
+} from "antd";
 import "antd/dist/reset.css";
 
 export default function ButtonUsage() {
   const { Content, Footer, Header, Sider } = Layout;
   return (
     <>
-      <Layout>
-        <Header>
-          <Button type="primary">Primary Button</Button>
-        </Header>
+      <ConfigProvider
+        theme={{
+          token: {
+            // colorPrimary: "#f5222d",
+            // colorInfo: "#f5222d",
+            fontSize: 14,
+            sizeStep: 4,
+            sizeUnit: 2,
+          },
+          components: {
+            Layout: {
+              headerHeight: 48,
+              footerPadding: "16px 24px",
+            },
+          },
+        }}
+      >
         <Layout>
-          <Sider>left sidebar</Sider>
-          <Content className="h-[240px]">main content</Content>
-          <Sider>right sidebar</Sider>
+          <Header>
+            <Button type="primary">Primary Button</Button>
+          </Header>
+          <Layout>
+            <Sider>left sidebar</Sider>
+            <Content
+              style={{
+                height: "calc(100vh - (48px + 48px))",
+                overflowY: "auto",
+              }}
+            >
+              <DatePicker />
+              <Cascader />
+              <ColorPicker />
+            </Content>
+            <Sider>right sidebar</Sider>
+          </Layout>
+          <Footer className="h-[48px]">footer</Footer>
         </Layout>
-        <Footer>footer</Footer>
-      </Layout>
+      </ConfigProvider>
     </>
   );
 }
