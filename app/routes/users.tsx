@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import type { ActionFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { Form, Outlet, redirect, useLoaderData } from "@remix-run/react";
+import { Form, Link, Outlet, redirect, useLoaderData } from "@remix-run/react";
 import {
   Button,
   Cascader,
@@ -69,7 +69,8 @@ export default function Index() {
               {users.map((user) => {
                 return (
                   <div key={user.id}>
-                    {user.id}: {user.name} -- {user.email}
+                    <Link to={`/users/${user.id}`}>{user.id}</Link>: {user.name}{" "}
+                    -- {user.email}
                   </div>
                 );
               })}
