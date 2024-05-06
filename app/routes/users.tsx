@@ -1,10 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import type {
-  ActionFunction,
-  LoaderFunction,
-  LoaderFunctionArgs,
-} from "@remix-run/node";
-import { Form, Outlet, useLoaderData } from "@remix-run/react";
+import type { ActionFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { Form, Outlet, redirect, useLoaderData } from "@remix-run/react";
 import {
   Button,
   Cascader,
@@ -47,7 +43,15 @@ export default function Index() {
         }}
       >
         <Layout>
-          <Sider>left sider</Sider>
+          <Sider>
+            <Form method="post">
+              name: <Input name="name" />
+              email: <Input name="email" />
+              <Button htmlType="submit" type="primary">
+                New
+              </Button>
+            </Form>
+          </Sider>
           <Layout>
             <Header>header</Header>
             <Content
@@ -57,14 +61,6 @@ export default function Index() {
               }}
               className="p-4"
             >
-              <Form action="new" method="post">
-                name: <Input name="name" />
-                email: <Input name="email" />
-                <Button htmlType="submit" type="primary">
-                  New
-                </Button>
-              </Form>
-
               <Divider />
               <DatePicker />
               <Cascader />
@@ -90,3 +86,22 @@ export default function Index() {
     </>
   );
 }
+
+export const action: ActionFunction = async ({ params, request }) => {
+  // console.debug("action:", params, request);
+  const formData = await request.formData();
+  const name = formData.get("name");
+  const email = formData.get("email");
+  try {
+    const r = await prisma.user.create({
+      data: {
+        name: name as string,
+        email: email as string,
+      },
+    });
+    return redirect(`/users/${r.id}`);
+  } catch (err) {
+    console.error(err);
+    return redirect("/users");
+  }
+};
