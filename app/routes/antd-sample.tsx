@@ -1,14 +1,36 @@
+import type {
+  ActionFunction,
+  LoaderFunction,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
+import { Form, useLoaderData } from "@remix-run/react";
 import {
   Button,
   Cascader,
   ColorPicker,
   ConfigProvider,
   DatePicker,
+  Divider,
+  Input,
   Layout,
 } from "antd";
-import "antd/dist/reset.css";
+import { PrismaClient } from "@prisma/client";
 
-export default function ButtonUsage() {
+const prisma = new PrismaClient();
+
+export const action: ActionFunction = async ({ params, request }) => {
+  console.debug("action:", params, request);
+  return {};
+};
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const users = await prisma.user.findMany();
+  return users;
+};
+
+export default function Index() {
+  const users = useLoaderData<typeof loader>();
+
   const { Content, Footer, Header, Sider } = Layout;
   return (
     <>
@@ -30,24 +52,36 @@ export default function ButtonUsage() {
         }}
       >
         <Layout>
-          <Header>
-            <Button type="primary">Primary Button</Button>
-          </Header>
+          <Sider>left sider</Sider>
           <Layout>
-            <Sider>left sidebar</Sider>
+            <Header>header</Header>
             <Content
               style={{
                 height: "calc(100vh - (48px + 48px))",
                 overflowY: "auto",
               }}
+              className="p-4"
             >
+              <Form action="new" method="post">
+                name: <Input name="name" />
+                email: <Input name="email" />
+                <Button htmlType="submit" type="primary">
+                  New
+                </Button>
+              </Form>
+
+              <Divider />
               <DatePicker />
               <Cascader />
               <ColorPicker />
+
+              {users.map((user) => {
+                return <div key={user.id}>{user.id}: {user.name} -- {user.email}</div>;
+              })}
             </Content>
-            <Sider>right sidebar</Sider>
+            <Footer className="h-[48px]">footer</Footer>
           </Layout>
-          <Footer className="h-[48px]">footer</Footer>
+          <Sider collapsible>right sidebar</Sider>
         </Layout>
       </ConfigProvider>
     </>
