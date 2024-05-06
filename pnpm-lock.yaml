@@ -47,7 +47,7 @@ importers:
         version: 11.11.5(@emotion/react@11.11.4(@types/react@18.3.1)(react@18.3.1))(@types/react@18.3.1)(react@18.3.1)
       '@remix-run/dev':
         specifier: ^2.9.1
-        version: 2.9.1(@remix-run/react@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5))(@remix-run/serve@2.9.1(typescript@5.4.5))(@types/node@20.12.8)(babel-plugin-macros@3.1.0)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.8))
+        version: 2.9.1(@remix-run/react@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5))(@remix-run/serve@2.9.1(typescript@5.4.5))(@types/node@20.12.8)(babel-plugin-macros@3.1.0)(sass@1.76.0)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.8)(sass@1.76.0))
       '@remix-run/testing':
         specifier: ^2.9.1
         version: 2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5)
@@ -69,6 +69,9 @@ importers:
       prisma:
         specifier: ^5.13.0
         version: 5.13.0
+      sass:
+        specifier: ^1.76.0
+        version: 1.76.0
       tailwindcss:
         specifier: ^3.4.3
         version: 3.4.3
@@ -77,13 +80,13 @@ importers:
         version: 5.4.5
       vite:
         specifier: ^5.2.11
-        version: 5.2.11(@types/node@20.12.8)
+        version: 5.2.11(@types/node@20.12.8)(sass@1.76.0)
       vite-tsconfig-paths:
         specifier: ^4.3.2
-        version: 4.3.2(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.8))
+        version: 4.3.2(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.8)(sass@1.76.0))
       vitest:
         specifier: ^1.6.0
-        version: 1.6.0(@types/node@20.12.8)
+        version: 1.6.0(@types/node@20.12.8)(sass@1.76.0)
       zod:
         specifier: ^3.23.6
         version: 3.23.6
@@ -2582,6 +2585,9 @@ packages:
   ieee754@1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
 
+  immutable@4.3.5:
+    resolution: {integrity: sha512-8eabxkth9gZatlwl5TBuJnCsoTADlL6ftEr7A4qgdaTsPyreilDSnUk57SO+jfKcNtxPa22U5KK6DSeAYhpBJw==}
+
   import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -3567,6 +3573,11 @@ packages:
 
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
+
+  sass@1.76.0:
+    resolution: {integrity: sha512-nc3LeqvF2FNW5xGF1zxZifdW3ffIz5aBb7I7tSvOoNu7z1RQ6pFt9MBuiPtjgaI62YWrM/txjWlOCFiGtf2xpw==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
 
   scheduler@0.23.2:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
@@ -5912,7 +5923,7 @@ snapshots:
     dependencies:
       '@prisma/debug': 5.13.0
 
-  '@remix-run/dev@2.9.1(@remix-run/react@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5))(@remix-run/serve@2.9.1(typescript@5.4.5))(@types/node@20.12.8)(babel-plugin-macros@3.1.0)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.8))':
+  '@remix-run/dev@2.9.1(@remix-run/react@2.9.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.4.5))(@remix-run/serve@2.9.1(typescript@5.4.5))(@types/node@20.12.8)(babel-plugin-macros@3.1.0)(sass@1.76.0)(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.8)(sass@1.76.0))':
     dependencies:
       '@babel/core': 7.24.5
       '@babel/generator': 7.24.5
@@ -5929,7 +5940,7 @@ snapshots:
       '@remix-run/router': 1.16.0
       '@remix-run/server-runtime': 2.9.1(typescript@5.4.5)
       '@types/mdx': 2.0.13
-      '@vanilla-extract/integration': 6.5.0(@types/node@20.12.8)(babel-plugin-macros@3.1.0)
+      '@vanilla-extract/integration': 6.5.0(@types/node@20.12.8)(babel-plugin-macros@3.1.0)(sass@1.76.0)
       arg: 5.0.2
       cacache: 17.1.4
       chalk: 4.1.2
@@ -5971,7 +5982,7 @@ snapshots:
     optionalDependencies:
       '@remix-run/serve': 2.9.1(typescript@5.4.5)
       typescript: 5.4.5
-      vite: 5.2.11(@types/node@20.12.8)
+      vite: 5.2.11(@types/node@20.12.8)(sass@1.76.0)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -6525,7 +6536,7 @@ snapshots:
     transitivePeerDependencies:
       - babel-plugin-macros
 
-  '@vanilla-extract/integration@6.5.0(@types/node@20.12.8)(babel-plugin-macros@3.1.0)':
+  '@vanilla-extract/integration@6.5.0(@types/node@20.12.8)(babel-plugin-macros@3.1.0)(sass@1.76.0)':
     dependencies:
       '@babel/core': 7.24.5
       '@babel/plugin-syntax-typescript': 7.24.1(@babel/core@7.24.5)
@@ -6538,8 +6549,8 @@ snapshots:
       lodash: 4.17.21
       mlly: 1.7.0
       outdent: 0.8.0
-      vite: 5.2.11(@types/node@20.12.8)
-      vite-node: 1.6.0(@types/node@20.12.8)
+      vite: 5.2.11(@types/node@20.12.8)(sass@1.76.0)
+      vite-node: 1.6.0(@types/node@20.12.8)(sass@1.76.0)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
@@ -7411,6 +7422,8 @@ snapshots:
       postcss: 8.4.38
 
   ieee754@1.2.1: {}
+
+  immutable@4.3.5: {}
 
   import-fresh@3.3.0:
     dependencies:
@@ -8541,6 +8554,12 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
+  sass@1.76.0:
+    dependencies:
+      chokidar: 3.6.0
+      immutable: 4.3.5
+      source-map-js: 1.2.0
+
   scheduler@0.23.2:
     dependencies:
       loose-envify: 1.4.0
@@ -8970,13 +8989,13 @@ snapshots:
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
 
-  vite-node@1.6.0(@types/node@20.12.8):
+  vite-node@1.6.0(@types/node@20.12.8)(sass@1.76.0):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       pathe: 1.1.2
       picocolors: 1.0.0
-      vite: 5.2.11(@types/node@20.12.8)
+      vite: 5.2.11(@types/node@20.12.8)(sass@1.76.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -8987,18 +9006,18 @@ snapshots:
       - supports-color
       - terser
 
-  vite-tsconfig-paths@4.3.2(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.8)):
+  vite-tsconfig-paths@4.3.2(typescript@5.4.5)(vite@5.2.11(@types/node@20.12.8)(sass@1.76.0)):
     dependencies:
       debug: 4.3.4
       globrex: 0.1.2
       tsconfck: 3.0.3(typescript@5.4.5)
     optionalDependencies:
-      vite: 5.2.11(@types/node@20.12.8)
+      vite: 5.2.11(@types/node@20.12.8)(sass@1.76.0)
     transitivePeerDependencies:
       - supports-color
       - typescript
 
-  vite@5.2.11(@types/node@20.12.8):
+  vite@5.2.11(@types/node@20.12.8)(sass@1.76.0):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
@@ -9006,8 +9025,9 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.12.8
       fsevents: 2.3.3
+      sass: 1.76.0
 
-  vitest@1.6.0(@types/node@20.12.8):
+  vitest@1.6.0(@types/node@20.12.8)(sass@1.76.0):
     dependencies:
       '@vitest/expect': 1.6.0
       '@vitest/runner': 1.6.0
@@ -9026,8 +9046,8 @@ snapshots:
       strip-literal: 2.1.0
       tinybench: 2.8.0
       tinypool: 0.8.4
-      vite: 5.2.11(@types/node@20.12.8)
-      vite-node: 1.6.0(@types/node@20.12.8)
+      vite: 5.2.11(@types/node@20.12.8)(sass@1.76.0)
+      vite-node: 1.6.0(@types/node@20.12.8)(sass@1.76.0)
       why-is-node-running: 2.2.2
     optionalDependencies:
       '@types/node': 20.12.8

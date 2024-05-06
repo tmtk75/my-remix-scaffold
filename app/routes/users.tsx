@@ -13,10 +13,10 @@ import {
 } from "@remix-run/react";
 import { Input, Button, Divider, List, ListItem } from "@chakra-ui/react";
 import { ChakraProvider } from "@chakra-ui/react";
-import stylesheet from "~/chakra.scss";
 
 const prisma = new PrismaClient();
 
+import stylesheet from "~/chakra.scss?url";
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
 ];
