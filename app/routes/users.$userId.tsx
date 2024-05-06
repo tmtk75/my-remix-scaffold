@@ -1,7 +1,7 @@
+import { Button } from "@chakra-ui/react";
 import { PrismaClient } from "@prisma/client";
 import type { ActionFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-import { Button, Input } from "antd";
 
 const prisma = new PrismaClient();
 
@@ -29,7 +29,7 @@ export default function Index() {
       <h1>detail</h1>
       {theUser.name}@{theUser.email}
       <Form action="edit">
-        <Button htmlType="submit" type="primary">Edit</Button>
+        <Button type="submit">Edit</Button>
       </Form>
     </>
   );

@@ -11,7 +11,17 @@ import {
   redirect,
   useLoaderData,
 } from "@remix-run/react";
-import { Input, Button, Divider, List, ListItem } from "@chakra-ui/react";
+import {
+  Input,
+  Button,
+  Divider,
+  List,
+  ListItem,
+  extendTheme,
+  withDefaultColorScheme,
+  withDefaultSize,
+  withDefaultVariant,
+} from "@chakra-ui/react";
 import { ChakraProvider } from "@chakra-ui/react";
 
 const prisma = new PrismaClient();
@@ -29,7 +39,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function Index() {
   const users = useLoaderData<typeof loader>();
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <div className="h-[48px]">header</div>
       <div className="flex">
         <div className="p-8 w-[256px]">
@@ -83,3 +93,12 @@ export const action: ActionFunction = async ({ params, request }) => {
     return redirect("/users");
   }
 };
+
+const theme = extendTheme(
+  // https://v2.chakra-ui.com/docs/styled-system/theme
+  withDefaultColorScheme({ colorScheme: "teal" }),
+
+  withDefaultSize({ size: "sm" }),
+
+  withDefaultVariant({ variant: "outline" })
+);

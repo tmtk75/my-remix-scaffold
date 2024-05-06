@@ -1,6 +1,7 @@
 /*
  * not nest inside. https://remix.run/docs/en/main/start/tutorial#updating-data
  */
+import { Button, Input } from "@chakra-ui/react";
 import { PrismaClient } from "@prisma/client";
 import {
   redirect,
@@ -8,7 +9,6 @@ import {
   type LoaderFunctionArgs,
 } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
-import { Button, Input } from "antd";
 import { useState } from "react";
 const prisma = new PrismaClient();
 
@@ -73,9 +73,7 @@ export default function Index() {
             setState((s) => ({ ...s, email: e.target.value }));
           }}
         />
-        <Button htmlType="submit" type="primary">
-          Save
-        </Button>
+        <Button type="submit">Save</Button>
       </Form>
     </>
   );

@@ -1,5 +1,4 @@
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
-import { DatePicker, Button } from "antd";
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { ListBucketsCommand, S3Client } from "@aws-sdk/client-s3";
@@ -56,9 +55,6 @@ export default function Index() {
           </a>
         </li>
       </ul>
-
-      <Button type="primary">OK</Button>
-      <DatePicker />
     </div>
   );
 }
