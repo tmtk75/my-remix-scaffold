@@ -1,9 +1,10 @@
+import { PrismaClient } from "@prisma/client";
 import type {
   ActionFunction,
   LoaderFunction,
   LoaderFunctionArgs,
 } from "@remix-run/node";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, Outlet, useLoaderData } from "@remix-run/react";
 import {
   Button,
   Cascader,
@@ -14,14 +15,8 @@ import {
   Input,
   Layout,
 } from "antd";
-import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
-export const action: ActionFunction = async ({ params, request }) => {
-  console.debug("action:", params, request);
-  return {};
-};
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const users = await prisma.user.findMany();
@@ -76,8 +71,16 @@ export default function Index() {
               <ColorPicker />
 
               {users.map((user) => {
-                return <div key={user.id}>{user.id}: {user.name} -- {user.email}</div>;
+                return (
+                  <div key={user.id}>
+                    {user.id}: {user.name} -- {user.email}
+                  </div>
+                );
               })}
+
+              <Divider />
+
+              <Outlet />
             </Content>
             <Footer className="h-[48px]">footer</Footer>
           </Layout>

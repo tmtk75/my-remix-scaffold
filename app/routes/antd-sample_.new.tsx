@@ -1,8 +1,8 @@
 /*
- *
+ * not nest inside. https://remix.run/docs/en/main/start/tutorial#updating-data
  */
-import { redirect, type ActionFunction } from "@remix-run/node";
 import { PrismaClient } from "@prisma/client";
+import { type ActionFunction, redirect } from "@remix-run/node";
 const prisma = new PrismaClient();
 
 export const action: ActionFunction = async ({ params, request }) => {
@@ -17,11 +17,11 @@ export const action: ActionFunction = async ({ params, request }) => {
         email: email as string,
       },
     });
+    return redirect(`/antd-sample/${r.id}`);
   } catch (err) {
     console.error(err);
     return redirect("/antd-sample");
   }
-  return redirect("/antd-sample");
 };
 
 export default function Index() {
