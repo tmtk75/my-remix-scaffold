@@ -56,7 +56,7 @@ export default function Index() {
   }
   return (
     <>
-      <h1>detail</h1>
+      <h1 className="text-2xl font-bold">detail</h1>
       <Form method="post">
         <Input type="hidden" name="userId" value={theUser.id} />
         name:{" "}

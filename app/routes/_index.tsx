@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { ListBucketsCommand, S3Client } from "@aws-sdk/client-s3";
 import { env } from "~/env";
+import { NavLink } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
@@ -28,7 +29,7 @@ export const loader: LoaderFunction = async () => {
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
+    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }} className="p-8">
       <h1 className="text-3xl font-bold underline">Welcome to Remix</h1>
       <ul>
         <li>
@@ -53,6 +54,9 @@ export default function Index() {
           <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
             Remix Docs
           </a>
+        </li>
+        <li>
+          <NavLink to="/users">/users</NavLink>
         </li>
       </ul>
     </div>
