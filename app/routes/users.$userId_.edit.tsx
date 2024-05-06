@@ -5,10 +5,11 @@ import { PrismaClient } from "@prisma/client";
 import {
   redirect,
   type ActionFunction,
-  LoaderFunctionArgs,
+  type LoaderFunctionArgs,
 } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { Button, Input } from "antd";
+import { useState } from "react";
 const prisma = new PrismaClient();
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -46,6 +47,10 @@ export const action: ActionFunction = async ({ params, request }) => {
 
 export default function Index() {
   const theUser = useLoaderData<typeof loader>();
+  const [state, setState] = useState<{ name: string; email: string }>({
+    name: theUser?.name ?? "",
+    email: theUser?.email ?? "",
+  });
   if (!theUser) {
     return <></>;
   }
@@ -54,8 +59,20 @@ export default function Index() {
       <h1>detail</h1>
       <Form method="post">
         <Input type="hidden" name="userId" value={theUser.id} />
-        name: <Input name="name" value={theUser.name ?? ""} />
-        email: <Input name="email" value={theUser.email} />
+        name:{" "}
+        <Input
+          name="name"
+          value={state.name}
+          onChange={(e) => setState((s) => ({ ...s, name: e.target.value }))}
+        />
+        email:{" "}
+        <Input
+          name="email"
+          value={state.email}
+          onChange={(e) => {
+            setState((s) => ({ ...s, email: e.target.value }));
+          }}
+        />
         <Button htmlType="submit" type="primary">
           Save
         </Button>
