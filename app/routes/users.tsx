@@ -87,8 +87,9 @@ export default function Index() {
                   isActive ? "active" : isPending ? "pending" : ""
                 }
                 to={`/users/${user.id}`}
+                key={user.id}
               >
-                <ListItem key={user.id} className="flex flex-row justify-between">
+                <ListItem className="flex flex-row justify-between">
                   <span className="mr-4">{user.id}</span>
                   <span className="mr-4">{user.name}</span>
                   <span>{user.email}</span>

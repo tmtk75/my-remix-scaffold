@@ -22,7 +22,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 };
 
 export const action: ActionFunction = async ({ params, request }) => {
-  console.debug("action:", params, request);
+  console.debug("action:", params);
   const formData = await request.formData();
   const userId = formData.get("userId");
   const name = formData.get("name");
@@ -37,7 +37,7 @@ export const action: ActionFunction = async ({ params, request }) => {
         email: email as string,
       },
     });
-    console.log(r);
+    // console.log(r);
     return redirect(`/users/${r.id}`);
   } catch (err) {
     console.error(err);
@@ -46,6 +46,7 @@ export const action: ActionFunction = async ({ params, request }) => {
 };
 
 export default function Index() {
+  // const users = useRouteLoaderData("routes/users");
   const theUser = useLoaderData<typeof loader>();
   const [state, setState] = useState<{ name: string; email: string }>({
     name: theUser?.name ?? "",
