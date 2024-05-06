@@ -5,8 +5,8 @@ import { Button, Input } from "@chakra-ui/react";
 import { PrismaClient } from "@prisma/client";
 import {
   redirect,
-  type ActionFunction,
-  type LoaderFunctionArgs,
+  type ActionFunctionArgs,
+  type LoaderFunctionArgs
 } from "@remix-run/node";
 import { Form, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
@@ -21,10 +21,13 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   return theUser;
 };
 
-export const action: ActionFunction = async ({ params, request }) => {
-  console.debug("action:", params);
+//
+// curl -v -H"content-type: application/x-www-form-urlencoded;charset=UTF-8" -d 'name=abcd1234&email=1234@test.test' localhost:5173/users/40/edit
+//
+export const action = async ({ params, request }: ActionFunctionArgs) => {
+  // console.debug("action:", params);
+  const userId = params.userId;
   const formData = await request.formData();
-  const userId = formData.get("userId");
   const name = formData.get("name");
   const email = formData.get("email");
   try {
@@ -59,7 +62,6 @@ export default function Index() {
     <>
       <h1 className="text-2xl font-bold">detail</h1>
       <Form method="post">
-        <Input type="hidden" name="userId" value={theUser.id} />
         name:{" "}
         <Input
           name="name"
