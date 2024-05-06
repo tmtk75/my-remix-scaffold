@@ -1,18 +1,25 @@
 import { PrismaClient } from "@prisma/client";
-import type { ActionFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { Form, Link, Outlet, redirect, useLoaderData } from "@remix-run/react";
+import type {
+  ActionFunction,
+  LinksFunction,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
 import {
-  Button,
-  Cascader,
-  ColorPicker,
-  ConfigProvider,
-  DatePicker,
-  Divider,
-  Input,
-  Layout,
-} from "antd";
+  Form,
+  NavLink,
+  Outlet,
+  redirect,
+  useLoaderData,
+} from "@remix-run/react";
+import { Input, Button, Divider, List, ListItem } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
+import stylesheet from "~/chakra.scss";
 
 const prisma = new PrismaClient();
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const users = await prisma.user.findMany();
@@ -21,70 +28,40 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Index() {
   const users = useLoaderData<typeof loader>();
-
-  const { Content, Footer, Header, Sider } = Layout;
   return (
-    <>
-      <ConfigProvider
-        theme={{
-          token: {
-            // colorPrimary: "#f5222d",
-            // colorInfo: "#f5222d",
-            fontSize: 14,
-            sizeStep: 4,
-            sizeUnit: 2,
-          },
-          components: {
-            Layout: {
-              headerHeight: 48,
-              footerPadding: "16px 24px",
-            },
-          },
-        }}
-      >
-        <Layout>
-          <Sider>
-            <Form method="post">
-              name: <Input name="name" />
-              email: <Input name="email" />
-              <Button htmlType="submit" type="primary">
-                New
-              </Button>
-            </Form>
-          </Sider>
-          <Layout>
-            <Header>header</Header>
-            <Content
-              style={{
-                height: "calc(100vh - (48px + 48px))",
-                overflowY: "auto",
-              }}
-              className="p-4"
-            >
-              <Divider />
-              <DatePicker />
-              <Cascader />
-              <ColorPicker />
-
-              {users.map((user) => {
-                return (
-                  <div key={user.id}>
-                    <Link to={`/users/${user.id}`}>{user.id}</Link>: {user.name}{" "}
-                    -- {user.email}
-                  </div>
-                );
-              })}
-
-              <Divider />
-
-              <Outlet />
-            </Content>
-            <Footer className="h-[48px]">footer</Footer>
-          </Layout>
-          <Sider collapsible>right sidebar</Sider>
-        </Layout>
-      </ConfigProvider>
-    </>
+    <ChakraProvider>
+      <div className="h-[48px]">header</div>
+      <div className="flex">
+        <div className="p-8 w-[256px]">
+          <Form method="post">
+            name: <Input name="name" />
+            email: <Input name="email" />
+            <Button type="submit">New</Button>
+          </Form>
+          <Divider />
+          <Input type="datetime-local" />
+        </div>
+        <List spacing={2}>
+          {users.map((user) => {
+            return (
+              <ListItem key={user.id}>
+                <NavLink
+                  className={({ isActive, isPending }) =>
+                    isActive ? "active" : isPending ? "pending" : ""
+                  }
+                  to={`/users/${user.id}`}
+                >
+                  {user.id}: {user.name} -- {user.email}
+                </NavLink>
+              </ListItem>
+            );
+          })}
+        </List>
+        <div className="p-8">
+          <Outlet />
+        </div>
+      </div>
+    </ChakraProvider>
   );
 }
 
