@@ -2,11 +2,12 @@
 A scaffold for a fullstack web application with the following technologies.
 * remix
 * tailwind
-* ant design
+* chakra-ui
 * prisma
 * biome
 * zod
 * vitest
+* sass
 
 
 # Article
