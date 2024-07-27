@@ -13,6 +13,20 @@ A scaffold for a fullstack web application with the following technologies.
 # Article
 The outcome of <https://zenn.dev/tmtk75/scraps/aa82ab594e4c24>
 
+# Development
+Get started local development.
+```
+[0]$ docker compose up
+...
+```
+```
+[1]$ echo "DATABASE_URL=postgres://admin:abc123@localhost/example" > .env
+[1]$ npx prisma migrate dev
+...
+[1]$ pnpm run dev
+```
+
+
 # Dockernize
 ```
 docker build -t my-app .
